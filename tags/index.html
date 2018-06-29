@@ -1,0 +1,43 @@
+---
+layout: default
+title: Tags
+---
+
+<header>
+  <p class="username"><a href="/" target="_self">Lucas</a></p>
+</header>
+<main>
+  {% for tag in site.tags %}
+  <header>
+    <h2 class="tag">{{ tag[0] }}</h2>
+  </header>
+  
+  <ul>
+    {% assign pages_list = tag[1] %}
+
+    {% for node in pages_list %}
+      {% if node.title != null %}
+        {% if group == null or group == node.group %}
+          <article>
+            <header class="heading">
+                <h1 class="post-title"><a href="{{ node.url }}">{{ node.title }}</a> </h1>
+                <p class="timestamp">{{ node.date | date: "%b %e %Y" }}</p>
+            </header>
+          </article>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign pages_list = nil %}
+    {% assign group = nil %}
+  </ul>
+  {% endfor %}
+</main>
+<footer>
+<a href="/" style="border:0">home</a> &nbsp;
+<a href="/tags" style="border:0">tags</a> &nbsp;
+<a href="/about">about</a> &nbsp;
+<a href="https://github.com/lucascorleone">github</a>
+</footer>
+
+
